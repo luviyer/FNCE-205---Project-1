@@ -25,7 +25,7 @@ def create_df(excel_file, period):
 # Create a bunch of dataframes for the n values in a time period
 # and put them into a multi-index frame
 n_values = [1, 2, 4, 10, 20, 30, 40, 70, 100]
-ten_year_period = ['19861996']
+ten_year_period = ['20062016']
 pn = pd.DataFrame()
 
 total_returns = {}
@@ -63,19 +63,22 @@ for period in ten_year_period:
 # print(total_returns)
 # print(total_stats)
 # print(total_corr)
+total_corr.unstack(level=1)[[('High Cap', 'Mid Cap'), ('High Cap', 'Low Cap'), ('Mid Cap', 'Low Cap')]].plot()
+plt.title('Correlations of Returns Between Market Caps ' + period[0:4] + '-' + period[4:])
+plt.savefig('graphs/corr' + period[0:4] + '.png', dpi=600)
+# total_stats.unstack(level=1)['geo_mean'].plot()
+# plt.title('Portfolio Geometric Mean ' + period[0:4] + '-' + period[4:])
+# plt.savefig('graphs/geo_' + period[0:4] + '.png', dpi=600)
+# plt.close()
+#
+# total_stats.unstack(level=1)['ar_mean'].plot()
+# plt.title('Portfolio Arithmetic Mean ' + period[0:4] + '-' + period[4:])
+# plt.savefig('graphs/ar_' + period[0:4] + '.png', dpi=600)
+# plt.close()
+#
+# total_stats.unstack(level=1)['std'].plot()
+# plt.title('Portfolio Standard Deviation ' + period[0:4] + '-' + period[4:])
+# plt.savefig('graphs/std_' + period[0:4] + '.png', dpi=600)
+# plt.close()
 
-total_stats.unstack(level=1)['geo_mean'].plot()
-plt.title('Portfolio Geometric Mean ' + period[0:4] + '-' + period[4:])
-plt.savefig('graphs/geo_' + period[0:4] + '.png', dpi=600)
-plt.close()
-
-total_stats.unstack(level=1)['ar_mean'].plot()
-plt.title('Portfolio Arithmetic Mean ' + period[0:4] + '-' + period[4:])
-plt.savefig('graphs/ar_' + period[0:4] + '.png', dpi=600)
-plt.close()
-
-total_stats.unstack(level=1)['std'].plot()
-plt.title('Portfolio Standard Deviation ' + period[0:4] + '-' + period[4:])
-plt.savefig('graphs/std_' + period[0:4] + '.png', dpi=600)
-plt.close()
-
+# plt.show()
